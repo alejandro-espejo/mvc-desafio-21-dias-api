@@ -13,6 +13,8 @@ namespace mvc.Models
 
         public string Matricula { get; set; }
 
+        public string NotasTexto { get; set; }
+
         private List<double> notas;
         public List<double> Notas { 
             get 

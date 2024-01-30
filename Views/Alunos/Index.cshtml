@@ -3,7 +3,10 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Alunos</h1>
+  <h1 class="display-4">Alunos</h1>
+</div>
+<div>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal" data-whatever="Aluno">Cadastrar</button>
 </div>
 <table class="table">
   <thead>
@@ -11,21 +14,78 @@
       <th scope="col">ID</th>
       <th scope="col">Nome</th>
       <th scope="col">Matricula</th>
-      <th scope="col">Situação</th>
       <th scope="col">Notas</th>
+      <th scope="col">Situação</th>
+      <th scope="col">Ações</th>
     </tr>
   </thead>
   <tbody>
-    @foreach (var aluno in Model)
+    
+    @foreach (var aluno in ViewData["Itens"] as List<Aluno>)
     {
         <tr>
-        <th scope="row">@aluno.Id</th>
-        <td>@aluno.Nome</td>
-        <td>@aluno.Matricula</td>
-        <td>@aluno.Situacao()</td>
-        <td>@aluno.StrNotas()</td>
+          <th scope="row">@aluno.Id</th>
+          <td>@aluno.Nome</td>
+          <td>@aluno.Matricula</td>
+          <td>@aluno.StrNotas()</td>
+          <td>@aluno.Situacao()</td>
+          <td>
+            <form action="/alunos/remover" method="post">
+              <input type="hidden" name="id" value="@aluno.Id"/>
+              <input type="submit" class="btn btn-danger" value="Excluir"/>
+            </form>
+          </td>
         </tr>
     }
-    
   </tbody>
-</table>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        @model Aluno
+        <form asp-controller="Alunos" asp-action="Inserir"  method="post">
+          <div class="form-group">
+            <label for="form-aluno-nome" class="col-form-label">Nome:</label>
+            <input asp-for="Nome" type="text" class="form-control" id="form-aluno-nome">
+          </div>
+          <div class="form-group row">
+            <div class="col">
+              <label for="form-aluno-matricula" class="col-form-label">Matricula:</label>
+              <input asp-for="Matricula" type="text" class="form-control" id="form-aluno-matricula"/>
+            </div>
+            <div class="col">
+              <label for="form-aluno-notastexto" class="col-form-label">Notas:</label>
+              <input asp-for="NotasTexto" type="text" class="form-control" id="form-aluno-notastexto"/>
+            </div>
+          </div>
+          <div style="margin-top: 10px;" class="form-group row">
+            <div class="col-sm-10">
+              <button type="submit" class="btn btn-primary">Cadastrar</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  $('#exampleModal').on('show.bs.modal', function (event) {
+    var button = $(event.relatedTarget); // Button that triggered the modal
+    var recipient = button.data('whatever'); // Extract info from data-* attributes
+    var modal = $(this);
+    modal.find('.modal-title').text('Novo cadastro de ' + recipient);
+    modal.find('.modal-body input').val(null);
+  })
+</script>

@@ -36,3 +36,4 @@ C:\Users\aleja\Desktop\torneseumprogramador\desafio21dias-dotnet\mvc\bin\Debug\n
 C:\Users\aleja\Desktop\torneseumprogramador\desafio21dias-dotnet\mvc\bin\Debug\net8.0\runtimes\win\lib\netcoreapp2.1\System.Data.SqlClient.dll
 C:\Users\aleja\Desktop\torneseumprogramador\desafio21dias-dotnet\mvc\obj\Debug\net8.0\mvc.csproj.AssemblyReference.cache
 C:\Users\aleja\Desktop\torneseumprogramador\desafio21dias-dotnet\mvc\obj\Debug\net8.0\mvc.csproj.CopyComplete
+C:\Users\aleja\Desktop\torneseumprogramador\desafio21dias-dotnet\mvc\obj\Debug\net8.0\mvc.sourcelink.json
